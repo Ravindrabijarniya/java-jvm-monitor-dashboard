@@ -1,9 +1,9 @@
-package main.java.com.ravindra.jvmmonitor.metrics;
-
-import main.java.com.ravindra.jvmmonitor.model.ThreadInfo;  
+package com.ravindra.jvmmonitor.metrics;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
+
+import com.ravindra.jvmmonitor.model.ThreadInfo;
 
 public class ThreadCollector {
 

@@ -1,4 +1,4 @@
-package main.java.com.ravindra.jvmmonitor.model;
+package com.ravindra.jvmmonitor.model;
 
 import java.util.List;
 

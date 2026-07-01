@@ -1,10 +1,10 @@
-package main.java.com.ravindra.jvmmonitor.metrics;
-
-import main.java.com.ravindra.jvmmonitor.model.MemoryInfo;
+package com.ravindra.jvmmonitor.metrics;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
+
+import com.ravindra.jvmmonitor.model.MemoryInfo;
 
 public class MemoryCollector {
 

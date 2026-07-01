@@ -1,4 +1,4 @@
-package main.java.com.ravindra.jvmmonitor.model;
+package com.ravindra.jvmmonitor.model;
 
 public class MemoryInfo {
     private long heapUsed;

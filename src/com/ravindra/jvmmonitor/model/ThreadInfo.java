@@ -1,7 +1,7 @@
-package main.java.com.ravindra.jvmmonitor.model;
+package com.ravindra.jvmmonitor.model;
 
 public class ThreadInfo {
-    
+
     private int threadCount;
     private int peakThreadCount;
     private int daemonThreadCount;
@@ -14,13 +14,13 @@ public class ThreadInfo {
             int peakThreadCount,
             int daemonThreadCount,
             long totalStartedThreadCount) {
+
         this.threadCount = threadCount;
         this.peakThreadCount = peakThreadCount;
         this.daemonThreadCount = daemonThreadCount;
         this.totalStartedThreadCount = totalStartedThreadCount;
     }
 
-    // Generate Getters and Setters
     public int getThreadCount() {
         return threadCount;
     }

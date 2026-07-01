@@ -1,8 +1,9 @@
-package main.java.com.ravindra.jvmmonitor.metrics;
+package com.ravindra.jvmmonitor.metrics;
 
-import main.java.com.ravindra.jvmmonitor.model.RuntimeInfo;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+
+import com.ravindra.jvmmonitor.model.RuntimeInfo;
 
 public class RuntimeCollector {
 
