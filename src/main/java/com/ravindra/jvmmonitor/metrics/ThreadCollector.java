@@ -1,0 +1,27 @@
+package main.java.com.ravindra.jvmmonitor.metrics;
+
+import main.java.com.ravindra.jvmmonitor.model.ThreadInfo;  
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
+
+public class ThreadCollector {
+
+    public ThreadInfo collect() {
+
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+
+        return new ThreadInfo(
+
+                threadMXBean.getThreadCount(),
+
+                threadMXBean.getPeakThreadCount(),
+
+                threadMXBean.getDaemonThreadCount(),
+
+                threadMXBean.getTotalStartedThreadCount()
+
+        );
+    }
+
+}
