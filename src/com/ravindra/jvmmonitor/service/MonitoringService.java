@@ -1,6 +1,7 @@
 package com.ravindra.jvmmonitor.service;
 
 import com.ravindra.jvmmonitor.model.ClassLoadingInfo;
+import com.ravindra.jvmmonitor.model.DashboardSnapshot;
 import com.ravindra.jvmmonitor.model.GCInfo;
 import com.ravindra.jvmmonitor.model.MemoryInfo;
 import com.ravindra.jvmmonitor.model.MemoryPoolInfo;
@@ -67,6 +68,24 @@ public class MonitoringService {
     }
 
     public List<MemoryPoolInfo> getMemoryPools() {
-    return memoryPoolCollector.collect();
+        return memoryPoolCollector.collect();
+    }
+
+    public DashboardSnapshot collectSnapshot() {
+
+    return new DashboardSnapshot(
+
+            getRuntimeInfo(),
+
+            getMemoryInfo(),
+
+            getThreadInfo(),
+
+            getOSInfo(),
+
+            getGCInfo()
+
+    );
+
 }
 }

@@ -1,57 +1,39 @@
 package com.ravindra.jvmmonitor;
 
-import java.util.List;
-
-import com.ravindra.jvmmonitor.model.GCInfo;
-import com.ravindra.jvmmonitor.model.MemoryInfo;
-import com.ravindra.jvmmonitor.model.OSInfo;
-import com.ravindra.jvmmonitor.model.RuntimeInfo;
-import com.ravindra.jvmmonitor.model.ThreadInfo;
+import com.ravindra.jvmmonitor.dashboard.DashboardRenderer;
+import com.ravindra.jvmmonitor.exporter.CSVExporter;
+import com.ravindra.jvmmonitor.exporter.TextExporter;
+import com.ravindra.jvmmonitor.model.DashboardSnapshot;
 import com.ravindra.jvmmonitor.service.MonitoringService;
+import com.ravindra.jvmmonitor.util.ConsoleUtil;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+            throws InterruptedException {
 
         MonitoringService service = new MonitoringService();
 
-        RuntimeInfo runtime = service.getRuntimeInfo();
-        MemoryInfo memory = service.getMemoryInfo();
-        ThreadInfo thread = service.getThreadInfo();
-        OSInfo os = service.getOSInfo();
-        List<GCInfo> gcList = service.getGCInfo();
+        DashboardRenderer dashboard = new DashboardRenderer(service);
 
-        System.out.println("========== JVM Runtime ==========");
-        System.out.println("VM Name       : " + runtime.getVmName());
-        System.out.println("VM Vendor     : " + runtime.getVmVendor());
-        System.out.println("VM Version    : " + runtime.getVmVersion());
-        System.out.println("Uptime (ms)   : " + runtime.getUptime());
+        DashboardSnapshot snapshot = service.collectSnapshot();
 
-        System.out.println("\n========== Memory ==========");
-        System.out.println("Heap Used     : " + memory.getHeapUsed());
-        System.out.println("Heap Max      : " + memory.getHeapMax());
-        System.out.println("Non Heap Used : " + memory.getNonHeapUsed());
+        TextExporter txtExporter = new TextExporter();
 
-        System.out.println("\n========== Threads ==========");
-        System.out.println("Current       : " + thread.getThreadCount());
-        System.out.println("Peak          : " + thread.getPeakThreadCount());
-        System.out.println("Daemon        : " + thread.getDaemonThreadCount());
+        CSVExporter csvExporter = new CSVExporter();
 
-        System.out.println("\n========== Operating System ==========");
-        System.out.println("OS            : " + os.getOsName());
-        System.out.println("Version       : " + os.getOsVersion());
-        System.out.println("Architecture  : " + os.getArchitecture());
-        System.out.println("Processors    : " + os.getAvailableProcessors());
-        System.out.println("Load Average  : " + os.getSystemLoadAverage());
+        txtExporter.export(snapshot);
 
-        System.out.println("\n========== Garbage Collectors ==========");
+        csvExporter.export(snapshot);
 
-        for (GCInfo gc : gcList) {
+        while (true) {
 
-            System.out.println("------------------------------------");
-            System.out.println("Name          : " + gc.getName());
-            System.out.println("Collections   : " + gc.getCollectionCount());
-            System.out.println("Time (ms)     : " + gc.getCollectionTime());
+            ConsoleUtil.clearConsole();
+
+            dashboard.render();
+
+            Thread.sleep(2000);
+
         }
 
     }
